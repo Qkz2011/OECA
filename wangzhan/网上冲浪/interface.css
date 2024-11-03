@@ -1,0 +1,85 @@
+/** Copyright (C) Microsoft Corporation. All rights reserved.
+ * Use of this source code is governed by a BSD-style license that can be
+ * found in the LICENSE file.
+ */
+
+/* minimal css reset */
+html, body, div, h1, h2, h3, h4, h5, h6, a, p, img, ul, li, button { padding: 0; margin: 0; border: 0; outline: 0; }
+
+html, body {
+    width: 100vw; /* fullscreen */
+    height: 100vh; /* fullscreen */
+    overflow: hidden;
+    user-select: none;
+    font-family: system-ui, sans-serif;
+    font-size: 16px;
+    color: #000000;
+    touch-action: pinch-zoom; /* prevents navigating back with one finger */
+}
+
+#hamburger-container {
+  overflow: visible;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+html[dir="rtl"] #hamburger-container {
+  right: unset;
+  left: 10px;
+}
+
+/* page structure */
+
+#modal-root {
+  position: fixed;
+}
+
+#game-bg {
+    background: linear-gradient(rgb(56, 194, 238) 0%, rgb(46, 195, 208) 100%);
+    z-index: -1000;
+    pointer-events: none;
+}
+
+@media (forced-colors:active) {
+    #game-bg {
+        background: Canvas !important; /* takes main bg color preference */
+        /* CanvasText, LinkText, VisitedText, ActiveText, GrayText, Field, FieldText, HighlightText, Highlight (txt bg), ButtonText, ButtonFace (btn bg) */
+    }
+}
+
+#game-water {
+    background-image: url(water256.png);
+    background-size: 256px 256px;
+    background-repeat: repeat;
+    image-rendering: pixelated; /* important */
+    z-index: -900;
+    pointer-events: none;
+}
+
+#game-canvas {
+    image-rendering: pixelated; /* important */
+    z-index: -800;
+}
+
+.full-size {
+    position: absolute;
+    width: 100vw; /* fullscreen */
+    height: 100vh; /* fullscreen */
+    top: 0;
+    left: 0;
+}
+
+
+
+
+
+/* overlay */
+
+#game-tint,
+#game-tint.visible {
+    pointer-events: none;
+    z-index: 0;
+    background-color: rgba(255,255,255,0);
+    transition-timing-function: cubic-bezier(0.30, 0.20, 0.20, 1.00);
+    transition: background-color 0.35s;
